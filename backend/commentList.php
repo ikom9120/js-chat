@@ -1,6 +1,6 @@
 <?php
 
-$content = file_get_contents('comments_db.txt');
+$content = @file_get_contents('comments_db.txt');
 
 $results = [];
 $exploded = explode("\n", $content);
