@@ -1,0 +1,134 @@
+<html>
+
+<head>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="node_modules/sweetalert2/dist/sweetalert2.all.min.js"></script>
+</head>
+
+<body>
+<div id="customization" style="border:1px solid red; width: 100%; height: 80px">
+    <b>Настройки:</b><br>
+    <button id="status">Автообновление OFF</button>
+    <input type="text" id="sec" value="5">секунды
+</div>
+<br>
+Имя:<br>
+<input type="text" id="name"><br><br>
+Комментарий:<br>
+<textarea id="comment"></textarea> <br><br>
+<button id="send">Отправить</button>
+<br><br>
+<div id="text"><b>Комментарии:</b><br><br></div>
+
+<script>
+    function createComments() {
+        $.ajax({
+            url: '/backend/commentCreate.php',
+            type: 'post',
+            dataType: 'json',
+            data: {
+                name: $('#name').val(),
+                comment: $('#comment').val(),
+            },
+            timeout: 5 * 1000,
+            success: function (response) {
+                $('#name').val('');
+                $('#comment').val('');
+
+                getComments();
+            },
+            error: function (response) {
+                Swal.fire(
+                    'Ошибка отправки'
+                );
+            }
+        });
+
+    }
+
+    function getComments() {
+        $.ajax({
+            url: '/backend/commentList.php',
+            type: 'get',
+            dataType: 'json',
+            timeout: 5 * 1000,
+            success: function (response) {
+                $('#text').html('');
+                for (let i = 0; i < response.length; i++) {
+                    $('#text').append('Имя: ' + response[i].name + '<br>Комментарий: ' + response[i].comment + '<br><br>');
+                }
+            },
+            error: function (response) {
+                Swal.fire(
+                    'Ошибка отправки'
+                );
+            }
+        });
+
+    }
+
+    function isSecondsValidation() {
+        //проверка на наличие данных
+        if ($('#sec').val() === '') {
+            return false;
+        }
+
+        // проверка на целое число
+        if (/^\d+$/.test($('#sec').val()) !== true) {
+
+            Swal.fire(
+                'Ошибка.Допустим ввод только целого числа.'
+            );
+            $('#sec').val('');
+            return false;
+        }
+        return true;
+    }
+
+    $(document).ready(function () {
+
+        $('#send').on('click', function () {
+            createComments();
+        });
+
+        getComments();
+
+        let time;
+        $('#status').on('click', function () {
+            if ($('#status').text() == 'Автообновление OFF') {
+                $('#status').text('Автообновление ON');
+                time = setInterval(getComments, $('#sec').val() * 1000);
+            } else {
+                $('#status').text('Автообновление OFF');
+                clearInterval(time);
+            }
+
+        });
+        $('#sec').keyup(function () {
+            //console.log('12');
+            if (isSecondsValidation() === false) {
+                return;
+            }
+
+            //проверка числа на корректность
+            if ($('#sec').val() >= 5) {
+                clearInterval(time);
+                time = setInterval(getComments, $('#sec').val() * 1000);
+            } else {
+                if ($('#sec').val() !== '') {
+                    Swal.fire(
+                        'Ошибка.Частота обновления должна быть не менее 5 секунд.'
+                    );
+                }
+            }
+
+            // console.log($('#sec').val()>1);
+        });
+
+    });
+
+</script>
+
+</body>
+
+</html>
