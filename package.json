@@ -6,7 +6,8 @@
   "author": "ikom9120 <ikom9120@gmail.com>",
   "license": "MIT",
   "dependencies": {
-    "jQuery": "^1.7.4",
+    "bootstrap": "4.5.3",
+    "jquery": "^3.5.1",
     "nanobar": "^0.4.2",
     "sweetalert2": "^10.3.5"
   }
