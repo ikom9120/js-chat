@@ -66,13 +66,14 @@ $(document).ready(function () {
 
     $('#send').on('click', function () {
         createComments();
+        //  console.log($('#name').val());
     });
 
     getComments();
 
     let time;
     $('#status').on('click', function () {
-        if ($('#status').text() == 'Автообновление OFF') {
+        if ($('#status').text() === 'Автообновление OFF') {
             $('#status').text('Автообновление ON');
             time = setInterval(getComments, $('#sec').val() * 1000);
         } else {
