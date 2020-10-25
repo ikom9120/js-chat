@@ -103,4 +103,19 @@ $(document).ready(function () {
         // console.log($('#sec').val()>1);
     });
 
+    $('#grinning').on('click', function () {
+        // console.log('1');
+        $('#comment').val($('#comment').val() + ' :grinning:');
+        /* let newVal=$('#comment').val()+' :grinning:';
+         $('#comment').val(newVal); - аналогично примеру выше*/
+    });
+
+    $('#joy').on('click', function () {
+        $('#comment').val($('#comment').val() + ' :joy:');
+    });
+
+    $('#wink').on('click', function () {
+        $('#comment').val($('#comment').val() + ' :wink:');
+    });
+
 });
