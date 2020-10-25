@@ -32,6 +32,9 @@ function getComments() {
         success: function (response) {
             $('#text').html('');
             for (let i = 0; i < response.length; i++) {
+
+                response[i].comment = parseSmiles(response[i].comment);
+
                 $('#text').append('Имя: ' + response[i].name + '<br>Комментарий: ' + response[i].comment + '<br><br>');
             }
         },
@@ -60,6 +63,18 @@ function isSecondsValidation() {
         return false;
     }
     return true;
+}
+
+function parseSmiles(comment) {
+    comment = comment.replace(':grinning:',
+        '<img src="img/grinning.png" alt="" id="grinning" style="width: 30px; cursor: pointer">');
+
+    comment = comment.replace(':joy:',
+        '<img src="img/joy.png" alt="" id="joy" style="width: 30px; cursor: pointer">');
+
+    comment = comment.replace(':wink:',
+        '<img src="img/wink.png" alt="" id="wink" style="width: 30px; cursor: pointer">');
+    return comment;
 }
 
 $(document).ready(function () {
