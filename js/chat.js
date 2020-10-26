@@ -67,13 +67,13 @@ function isSecondsValidation() {
 
 function parseSmiles(comment) {
     comment = comment.replace(':grinning:',
-        '<img src="img/grinning.png" alt="" id="grinning" style="width: 30px; cursor: pointer">');
+        '<img src="img/grinning.png">');
 
     comment = comment.replace(':joy:',
-        '<img src="img/joy.png" alt="" id="joy" style="width: 30px; cursor: pointer">');
+        '<img src="img/joy.png">');
 
     comment = comment.replace(':wink:',
-        '<img src="img/wink.png" alt="" id="wink" style="width: 30px; cursor: pointer">');
+        '<img src="img/wink.png">');
     return comment;
 }
 
