@@ -9,6 +9,7 @@
     <script src="js/chat.js"></script>
     <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
 
+    <link href="css/chat.css" rel="stylesheet">
     <link href="node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
 
 </head>
@@ -76,10 +77,10 @@
                         </div>
                         <div class="form-group">
                             <label for="comment">Комментарий:</label>
-                            <div style="border: 1px solid #ced4da; border-bottom: 0; padding: 3px; background-color: #f8f9fa">
-                                <img src="img/grinning.png" alt="" id="grinning" style="width: 30px; cursor: pointer">
-                                <img src="img/joy.png" alt="" id="joy" style="width: 30px; cursor: pointer">
-                                <img src="img/wink.png" alt="" id="wink" style="width: 30px; cursor: pointer">
+                            <div class="smile-container">
+                                <img src="img/grinning.png" alt="" id="grinning" class="smile">
+                                <img src="img/joy.png" alt="" id="joy" class="smile">
+                                <img src="img/wink.png" alt="" id="wink" class="smile">
                             </div>
                             <textarea class="form-control" id="comment" rows="3"
                                       placeholder="Ваш комментарий"></textarea>
@@ -90,7 +91,7 @@
 
                     <br><br>
                     <b>Комментарии:</b><br>
-                    <div id="text" style="overflow-wrap: break-word"></div>
+                    <div id="text"></div>
                 </div>
             </div>
 
