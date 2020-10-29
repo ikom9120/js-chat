@@ -82,6 +82,7 @@ $(document).ready(function () {
     $('#send').on('click', function () {
         createComments();
         //  console.log($('#name').val());
+        $('#send').attr('disabled', true);
     });
 
     getComments();
@@ -123,14 +124,27 @@ $(document).ready(function () {
         $('#comment').val($('#comment').val() + ' :grinning:');
         /* let newVal=$('#comment').val()+' :grinning:';
          $('#comment').val(newVal); - аналогично примеру выше*/
+        $('#comment').focus();
     });
 
     $('#joy').on('click', function () {
         $('#comment').val($('#comment').val() + ' :joy:');
+        $('#comment').focus();
     });
 
     $('#wink').on('click', function () {
         $('#comment').val($('#comment').val() + ' :wink:');
+        $('#comment').focus();
+    });
+
+    $('#comment').keyup(function () {
+
+        if ($('#comment').val() !== '') {
+            //console.log('1');
+            $('#send').attr('disabled', false);
+        } else {
+            $('#send').attr('disabled', true);
+        }
     });
 
 });
