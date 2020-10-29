@@ -30,6 +30,9 @@ function getComments() {
         dataType: 'json',
         timeout: 5 * 1000,
         success: function (response) {
+
+            goNanobar();
+
             $('#text').html('');
             for (let i = 0; i < response.length; i++) {
 
@@ -77,12 +80,24 @@ function parseSmiles(comment) {
     return comment;
 }
 
+function goNanobar() {
+    let nanobar = new Nanobar({
+        classname: 'my-class',
+        id: 'my-id',
+        target: document.getElementById('myDivId')
+    });
+    nanobar.go(100);
+}
+
 $(document).ready(function () {
 
     $('#send').on('click', function () {
         createComments();
         //  console.log($('#name').val());
         $('#send').attr('disabled', true);
+
+        goNanobar();
+
     });
 
     getComments();
