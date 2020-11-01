@@ -27,7 +27,7 @@ function createComments() {
 }
 
 /**
- * ф-ция отправляет запос для получения комментариев и вывода на страницу
+ * Ф-ция отправляет запос для получения комментариев и вывода на страницу
  */
 function getComments() {
     $.ajax({
@@ -57,7 +57,7 @@ function getComments() {
 }
 
 /**
- * ф-ция проверяет корректность введенного числа
+ * Ф-ция проверяет корректность введенного числа
  * @returns {boolean}
  */
 function isSecondsValidation() {
@@ -79,7 +79,7 @@ function isSecondsValidation() {
 }
 
 /**
- * ф-ция заменяет коды смайлов на картинки
+ * Ф-ция заменяет коды смайлов на картинки
  * @param comment
  * @returns {*}
  */
@@ -96,7 +96,7 @@ function parseSmiles(comment) {
 }
 
 /**
- * ф-ция отображает лоадер
+ * Ф-ция отображает лоадер
  */
 function goNanobar() {
     let nanobar = new Nanobar({
