@@ -27,7 +27,7 @@ function createComments() {
 }
 
 /**
- * Ф-ция отправляет запос для получения комментариев и вывода на страницу
+ * Ф-ция отправляет запрос для получения комментариев и вывода на страницу
  */
 function getComments() {
     $.ajax({
@@ -58,6 +58,7 @@ function getComments() {
 
 /**
  * Ф-ция проверяет корректность введенного числа
+ *
  * @returns {boolean}
  */
 function isSecondsValidation() {
@@ -80,6 +81,7 @@ function isSecondsValidation() {
 
 /**
  * Ф-ция заменяет коды смайлов на картинки
+ *
  * @param comment
  * @returns {*}
  */
