@@ -1,3 +1,6 @@
+/**
+ * Ф-ция отправляет запрос на backend для сохранения комментария
+ */
 function createComments() {
     $.ajax({
         url: '/backend/commentCreate.php',
@@ -23,6 +26,9 @@ function createComments() {
 
 }
 
+/**
+ * Ф-ция отправляет запрос для получения комментариев и вывода на страницу
+ */
 function getComments() {
     $.ajax({
         url: '/backend/commentList.php',
@@ -50,6 +56,11 @@ function getComments() {
 
 }
 
+/**
+ * Ф-ция проверяет корректность введенного числа
+ *
+ * @returns {boolean}
+ */
 function isSecondsValidation() {
     //проверка на наличие данных
     if ($('#sec').val() === '') {
@@ -68,6 +79,12 @@ function isSecondsValidation() {
     return true;
 }
 
+/**
+ * Ф-ция заменяет коды смайлов на картинки
+ *
+ * @param comment
+ * @returns {*}
+ */
 function parseSmiles(comment) {
     comment = comment.replace(':grinning:',
         '<img src="img/grinning.png">');
@@ -80,6 +97,9 @@ function parseSmiles(comment) {
     return comment;
 }
 
+/**
+ * Ф-ция отображает лоадер
+ */
 function goNanobar() {
     let nanobar = new Nanobar({
         classname: 'my-class',
@@ -88,78 +108,3 @@ function goNanobar() {
     });
     nanobar.go(100);
 }
-
-$(document).ready(function () {
-
-    $('#send').on('click', function () {
-        createComments();
-        //  console.log($('#name').val());
-        $('#send').attr('disabled', true);
-
-        goNanobar();
-
-    });
-
-    getComments();
-
-    let time;
-    $('#status').on('click', function () {
-        if ($('#status').text() === 'Автообновление OFF') {
-            $('#status').text('Автообновление ON');
-            time = setInterval(getComments, $('#sec').val() * 1000);
-        } else {
-            $('#status').text('Автообновление OFF');
-            clearInterval(time);
-        }
-
-    });
-    $('#sec').keyup(function () {
-        //console.log('12');
-        if (isSecondsValidation() === false) {
-            return;
-        }
-
-        //проверка числа на корректность
-        if ($('#sec').val() >= 5) {
-            clearInterval(time);
-            time = setInterval(getComments, $('#sec').val() * 1000);
-        } else {
-            if ($('#sec').val() !== '') {
-                Swal.fire(
-                    'Ошибка.Частота обновления должна быть не менее 5 секунд.'
-                );
-            }
-        }
-
-        // console.log($('#sec').val()>1);
-    });
-
-    $('#grinning').on('click', function () {
-        // console.log('1');
-        $('#comment').val($('#comment').val() + ' :grinning:');
-        /* let newVal=$('#comment').val()+' :grinning:';
-         $('#comment').val(newVal); - аналогично примеру выше*/
-        $('#comment').focus();
-    });
-
-    $('#joy').on('click', function () {
-        $('#comment').val($('#comment').val() + ' :joy:');
-        $('#comment').focus();
-    });
-
-    $('#wink').on('click', function () {
-        $('#comment').val($('#comment').val() + ' :wink:');
-        $('#comment').focus();
-    });
-
-    $('#comment').keyup(function () {
-
-        if ($('#comment').val() !== '') {
-            //console.log('1');
-            $('#send').attr('disabled', false);
-        } else {
-            $('#send').attr('disabled', true);
-        }
-    });
-
-});
