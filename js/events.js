@@ -1,5 +1,7 @@
 $(document).ready(function () {
 
+    $('#comment').val($.cookie('message'));
+
     $('#send').on('click', function () {
         createComments();
         //  console.log($('#name').val());
@@ -62,6 +64,9 @@ $(document).ready(function () {
     });
 
     $('#comment').keyup(function () {
+
+        //пишу комментарий в cookie
+        saveCommentToCookie();
 
         if ($('#comment').val() !== '') {
             //console.log('1');
