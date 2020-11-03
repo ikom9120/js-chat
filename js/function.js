@@ -108,3 +108,10 @@ function goNanobar() {
     });
     nanobar.go(100);
 }
+
+/**
+ * Ф-ция записывает в cookie
+ */
+function saveCommentToCookie() {
+    $.cookie('message', $('#comment').val());
+}
