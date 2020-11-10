@@ -15,11 +15,12 @@ $(document).ready(function () {
 
     let time;
     $('#status').on('click', function () {
-        if ($('#status').text() === 'Автообновление OFF') {
-            $('#status').text('Автообновление ON');
+        if ($('#status').prop("checked") === true) {
+            $('#status-auto').html('включено').css('color', 'green');
             time = setInterval(getComments, $('#sec').val() * 1000);
         } else {
-            $('#status').text('Автообновление OFF');
+            // console.log()
+            $('#status-auto').html('отключено').css('color', 'red');
             clearInterval(time);
         }
 
